@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+</head>
+<body>
+<a href="/home/">返回主页</a>
+    <table border="1">
+    <tr>
+            <td>头像：<img src="/media/{{ info.photo }}" alt="" width="80" height="60"/></td>
+	</tr>
+
+    <tr>
+            <td>用户名:{{ info.username }}</td>
+	</tr>
+    <tr>
+            <td>昵称:{{ info.first_name }}</td>
+	</tr>
+
+	<tr>
+            <td>性别：{{ info.sex }}</td>
+	</tr>
+    <tr>
+            <td>个性签名：{{info.motto}}</td>
+	</tr>
+
+	<tr><br></tr>
+    </table>
+	<br>
+    <form method = 'post' enctype="multipart/form-data">
+            {% csrf_token %}
+            <span>修改信息</span>
+            <br>
+			<label>
+			<span>昵称：</span>
+			<input id="first_name" type="text" name="first_name" placeholder="昵称" />
+			</label>
+            <br>
+			<label>
+			<span>性别</span>
+            <input type="radio" name="sex" value="男" checked>男
+            <br>
+            <input type="radio" name="sex" value="女">女
+            <br>
+            <input type="radio" name="sex" value="其他">其他
+			</label>
+
+            <label>
+			<span>头像</span>
+			<input id="photo" type="file" name="photo" />
+			</label>
+            <br>
+            <label>
+			<span>个性签名：</span>
+            <textarea id="motto" name="motto" placeholder="个性签名"></textarea>
+			</label>
+            <br>
+			<label>
+			<input type="submit" id="submit" class="button" value="上传" />
+			</label>
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>用户注册</title>
+</head>
+  <style type="text/css">
+    body{color:#efd;background:#453;padding:0 5em;margin:0}
+    h1{padding:2em 1em;background:#675}
+    h2{color:#bf8;border-top:1px dotted #fff;margin-top:2em}
+    p{margin:1em 0}
+  </style>
+<body>
+<h1>注册页面：</h1>
+<form method = 'post' enctype="multipart/form-data">
+            {% csrf_token %}
+			<label>
+			<span>用户名:</span>
+			<input id="username" type="text" name="username" placeholder="用户名" />
+			</label>
+
+			<label>
+			<span>密码:</span>
+			<input id="password1" type="password" name="password1" placeholder="密码" />
+			</label>
+            <label>
+			<span>确认密码:</span>
+			<input id="password2" type="password" name="password2" placeholder="确认密码" />
+			</label>
+
+			<label>
+			<p><span id='error'>{{errors}}</span></p>
+			<input type="submit" id="submit" class="button" value="发送" />
+			</label>
+
+</form>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#submit").click(function(){
+        var username = $("#username").val();
+        var password = $("#password1").val();
+        var password = $("#password2").val();
+
+        $.getJSON("/register/",function(ret){
+            $('#error').html(ret)
+        })
+      });
+    });
+</script>
+</body>
+</html>

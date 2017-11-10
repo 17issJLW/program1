@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOME</title>
+</head>
+<body>
+<a href="/upload.html">新故事</a>
+<a href="/user_info.html">个人信息</a>
+<a href="/logout_view">注销</a>
+    {% for item in story %}
+    <table border="1">
+    <tr>
+            <td>{{ item.author }}</td>
+	</tr>
+
+    <tr>
+            <td>{{ item.title }}</td>
+	</tr>
+    <tr>
+            <td>{{ item.time }}</td>
+	</tr>
+
+	<tr>
+            <td>{{ item.article }}</td>
+	</tr>
+    <tr>
+            <td><img src="/media/{{ item.img }}" alt=""/></td>
+	</tr>
+
+	<tr><br></tr>
+
+    </table>
+	<br>
+	{% endfor %}
+
+</body>
+</html>

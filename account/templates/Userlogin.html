@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>用户登录</title>
+</head>
+  <style type="text/css">
+    body{color:#efd;background:#453;padding:0 5em;margin:0}
+    h1{padding:2em 1em;background:#675}
+    h2{color:#bf8;border-top:1px dotted #fff;margin-top:2em}
+    p{margin:1em 0}
+  </style>
+<body>
+<h1>登录页面：</h1>
+<form method = 'post' enctype="multipart/form-data">
+            {% csrf_token %}
+			<label>
+			<span>用户名:</span>
+			<input id="username" type="text" name="username" placeholder="用户名" />
+			</label>
+
+			<label>
+			<span>密码:</span>
+			<input id="password" type="password" name="password" placeholder="密码" />
+			</label>
+
+			<label>
+			<p><span id='error'>{{error}}</span></p>
+			<input type="submit" id="submit" class="button" value="发送" />
+			</label>
+
+</form>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#submit").click(function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        $.getJSON("/login/",{'username':username,'password':password},function(ret){
+            $('#error').html(ret.result)
+        })
+      });
+    });
+</script>
+
+</body>
+</html>
