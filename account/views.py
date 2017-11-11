@@ -64,17 +64,15 @@ def register(request):
                 return HttpResponseRedirect("/login_view/")
     return render(request,'Register.html')
 
+@login_required  #如果用户未认证，则返回登录页面
 def home(request):
     """主页面，显示照片和故事"""
-    if not request.user.is_authenticated():
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))  #如果用户未认证，则返回登录页面
     story = Passage.objects.order_by("-id")[0:8]
     return render(request, 'home.html', {'story': story})
 
+@login_required  #如果用户未认证，则返回登录页面
 def upload(request):
     """上传故事，照片"""
-    if not request.user.is_authenticated():
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))  #如果用户未认证，则返回登录页面
     if request.method=="POST":
         load = UpLoad(request.POST)
         load2 = UpLoad2(request.POST)
@@ -88,10 +86,10 @@ def upload(request):
     else:
         return render(request,'upload.html')
 
+@login_required  #如果用户未认证，则返回登录页面
 def user_info(request):
     """个人信息页面,如果提交表单，就修改信息"""
-    if not request.user.is_authenticated():
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))  #如果用户未认证，则返回登录页面
+
     if request.method=="POST":
         first_name = request.POST['first_name']
         sex = request.POST['sex']
